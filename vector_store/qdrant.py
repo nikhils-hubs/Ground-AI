@@ -1,7 +1,7 @@
 import os 
 import uuid
 from dotenv import load_dotenv
-from qdrant_client import QdrantClient
+from qdrant_client import AsyncQdrantClient
 from qdrant_client.models import (Distance, VectorParams, PointStruct, 
                                    Filter, FieldCondition, MatchValue) 
 from langchain_core.documents import Document
@@ -10,8 +10,8 @@ load_dotenv()
 
 class QdrantRepository:
     
-    async def __init__(self):
-        await self.client = QdrantClient(
+    def __init__(self):
+        self.client = AsyncQdrantClient(
             url = os.getenv("QDRANT_ENDPOINT"),
             api_key = os.getenv("QDRANT_API_KEY"),
         )
